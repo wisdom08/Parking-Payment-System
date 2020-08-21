@@ -24,6 +24,17 @@
  	<%= request.getAttribute("carNum") %> 님
  
  <!--  시간 추가 해야한다.  -->
+
+	<%-- <%  String price = (String) request.getAttribute("price"); 
+		String mType = (String) request.getAttribute("mType"); 
+	if(mType.equals("1")) {%>
+ 
+	가격은 0 원입니다. 
+	
+ <%} else if(mType.equals("2")){%>
+ 	가격은  price/2 입니다. 
+ <%} %> --%>
+ 
  
 	가격은
 	<%=request.getAttribute("price")%>
@@ -44,6 +55,11 @@
 	<script>
 	
 		function btn() {
+
+				
+
+			
+			
 
 	/* 		let uprice = document.getElementyById("uprice"); */
 		<%-- 	let price = '<%= price %>';  --%>

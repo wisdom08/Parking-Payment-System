@@ -5,12 +5,16 @@ public class Pdto {
 	private int pid;
 	private int mid;
 	private int amount;
-	private int type;
+	private String method;
 	private String date;
 	private String carNum;
 
 	public Pdto() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public Pdto(int amount, String method) {
+		this.amount = amount;
+		this.method = method;
 	}
 
 	public int getPid() {
@@ -37,12 +41,12 @@ public class Pdto {
 		this.amount = amount;
 	}
 
-	public int getType() {
-		return type;
+	public String getMethod() {
+		return method;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 	public String getDate() {

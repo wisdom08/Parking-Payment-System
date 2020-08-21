@@ -27,5 +27,19 @@
 	</c:forEach>
 	</table>
 
+<table border="1" >
+	<tr>
+		<th>amount</th>
+		<th>type(0은 게스트, 1은 장기회원, 2는 쿠폰이용자)</th>
+	</tr>
+	<c:forEach var="temp" items="${plist}">
+	<tr>
+		<td>	${temp.amount } </td>
+		<td>	${temp.type } </td>
+	</tr>
+	</c:forEach>
+	</table>
+
+
 </body>
 </html>

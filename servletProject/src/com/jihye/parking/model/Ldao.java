@@ -60,7 +60,7 @@ public class Ldao {
 
 	}
 
-	public static boolean update(String ucarNum) {
+	public static boolean update(String ucarNum) throws SQLException {
 
 		System.out.println("ldao timeout update 진입");
 
@@ -68,6 +68,14 @@ public class Ldao {
 		PreparedStatement pstmt = null;
 
 		int flag = 0;
+
+		/*
+		 * String memberType = Mdao.select(ucarNum);
+		 * 
+		 * if(memberType.equals("4")) { System.out.println("입차 x"); } else
+		 * if(memberType.equals("1"))
+		 * 
+		 */
 
 		try {
 			// 1. DB 연결
@@ -209,6 +217,51 @@ public class Ldao {
 		}
 
 		return list;
+
+	}
+
+	public static boolean selectLogCheck(String carNum) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		System.out.println("입차한 차량 체크 메서드 진입 ");
+
+		try {
+			// 1. DB 연결
+			con = new DBConnect().getCon();
+			String sql = "SELECT carNum FROM logs WHERE carNum = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, carNum);
+			rs = pstmt.executeQuery();
+
+			String unarNum = null;
+
+			while (rs.next()) {
+				String ucarNum = rs.getString("carNum");
+				System.out.println("ucarNum!!!!!!!" + ucarNum);
+			}
+
+			if (unarNum == null) {
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 5. 사용한 객체를 닫아준다.
+				if (con != null)
+					con.close();
+				// if (stmt != null)
+				// stmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		return false;
 
 	}
 

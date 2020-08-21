@@ -30,7 +30,7 @@
 	<form method="post" action="checkPrice">
 		<label>계산 금액을 정확하게 입력해주세요. </label> <input type="text" name="uprice"
 			id="uprice"> <br> <label>결제방법을 적어주세요.1은 카드 2는 현금</label> <input
-			type="text" name="type"> <br> <input type="submit" value="결제"
+			type="text" name="method"> <br> <input type="submit" value="결제"
 			>
 
 

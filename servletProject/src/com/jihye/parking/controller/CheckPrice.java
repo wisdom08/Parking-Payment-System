@@ -23,12 +23,12 @@ public class CheckPrice extends HttpServlet {
 		String uprice = req.getParameter("uprice");
 		System.out.println("uprice:::::" + uprice);
 
-		String type = req.getParameter("type");
-		System.out.println("type:!!!!!!!!!!!!!!:::" + type);
+		String method = req.getParameter("method");
+		System.out.println("method:!!!!!!!!!!!!!!:::" + method);
 
 		String carNum = req.getParameter("carNum");
 
-		Pdao.update(type, carNum);
+		Pdao.update(method, carNum);
 
 		// String price = Pdao.select();
 		// System.out.println("price:::::" + price);

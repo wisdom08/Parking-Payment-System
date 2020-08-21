@@ -5,14 +5,14 @@ public class Mdto {
 	int mid;
 	String name;
 	String carNum;
-	int type;
+	String type;
 	String regDate;
 	String expDate;
 
 	public Mdto() {
 	}
 
-	public Mdto(int mid, String name, String carNum, int type, String regDate, String expDate) {
+	public Mdto(int mid, String name, String carNum, String type, String regDate, String expDate) {
 		super();
 		this.mid = mid;
 		this.name = name;
@@ -62,11 +62,11 @@ public class Mdto {
 		this.carNum = carNum;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

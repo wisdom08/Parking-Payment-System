@@ -1,6 +1,7 @@
 package com.jihye.parking.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,13 +32,27 @@ public class Check extends HttpServlet {
 
 		req.setCharacterEncoding("utf-8");
 		String carNum = req.getParameter("carNum");
-
 		System.out.println("check controller");
 
 		System.out.println("carNum::::::" + carNum);
 		req.setAttribute("carNum", carNum);
 
-		int mType = 0;
+		boolean parkCheck = Ldao.selectLogCheck(carNum);
+
+		System.out.println("입차여부 체크!!! " + parkCheck);
+
+		if (!parkCheck) {
+			res.setContentType("text/html;charset=utf-8");
+			PrintWriter out = res.getWriter();
+			out.print("<script type='text/javascript'>");
+			out.print("alert('입차한 차량이 아닙니다. ');");
+			out.print("location.href='/';");
+			out.print("</script>");
+
+			return;
+		}
+
+		String mType = "0";
 		try {
 			mType = Mdao.select(carNum);
 		} catch (SQLException e) {
@@ -52,23 +67,28 @@ public class Check extends HttpServlet {
 		// 1=> 0원, 기간 안내, 기간연장 여부 확인, 연장시 결제
 		// 2=> 50% 할인, 금액 안내 , 결제
 
-		boolean timeoutUpdate = Ldao.update(carNum);
+		boolean timeoutUpdate = false;
+		try {
+			timeoutUpdate = Ldao.update(carNum);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		System.out.println("timeoutUpdate::::" + timeoutUpdate);
 
-		switch (mType) {
-		case 0:
-			req.setAttribute("mType", 0);
-			break;
-		case 1:
-			req.setAttribute("mType", 1);
-			break;
-		case 2:
-			req.setAttribute("mType", 2);
-			break;
-		case 4:
-			req.setAttribute("mType", 4);
-			break;
-		}
+//		switch (mType) {
+//		case "0":
+//			req.setAttribute("mType", "0");
+//			break;
+//		case "1":
+//			req.setAttribute("mType", "1");
+//			break;
+//		case "2":
+//			req.setAttribute("mType", "2");
+//			break;
+//		case "4":
+//			req.setAttribute("mType", "4");
+//			break;
+//		}
 
 		try {
 
@@ -99,6 +119,27 @@ public class Check extends HttpServlet {
 			}
 
 			long price = calPrice(d, h);
+
+			switch (mType) {
+			case "0":
+				req.setAttribute("mType", "0");
+				break;
+			case "1":
+				req.setAttribute("mType", "1");
+				break;
+			case "2":
+				req.setAttribute("mType", "2");
+				break;
+			case "4":
+				req.setAttribute("mType", "4");
+				break;
+			}
+
+			if (mType.equals("1")) {
+				price = 0;
+			} else if (mType.equals("2")) {
+				price = price / 2;
+			}
 
 			// 계산 과정 거친 시간이랑 가격 jsp로 보내서 뿌리자.
 			req.setAttribute("times", times);
