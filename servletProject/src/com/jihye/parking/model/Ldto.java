@@ -31,6 +31,13 @@ public class Ldto {
 		this.carNum = carNum;
 	}
 
+	public Ldto(String timeIn, String timeOut, String carNum) {
+		super();
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.carNum = carNum;
+	}
+
 	public Ldto(String timeIn2, String timeOut2) {
 		timeIn = timeIn2;
 		timeOut = timeOut2;

@@ -17,7 +17,7 @@ public class DBConnect {
 			// 드라이버 로딩
 			Class.forName(driver);
 			// 접속할 디비 정보
-			String url = "jdbc:mysql://localhost:3333/parking_system?&useSSL=false&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3333/parking_system?&useSSL=false&serverTimezone=Asia/Seoul";
 			String user = "j";
 			String password = "1234";
 			// 접속하고 Connection 객체의 참조값 얻어오기(db 연동의 핵심 객체)
