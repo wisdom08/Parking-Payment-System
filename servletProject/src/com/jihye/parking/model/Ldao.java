@@ -181,7 +181,7 @@ public class Ldao {
 			while (rs.next()) {
 
 				String timeIn = rs.getString("timeIn");
-				String timeOut = rs.getString("timeIn");
+				String timeOut = rs.getString("timeOut");
 				String ucarNum = rs.getString("carNum");
 
 				System.out.println(timeIn);

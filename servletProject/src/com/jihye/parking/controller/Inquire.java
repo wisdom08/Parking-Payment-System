@@ -1,8 +1,8 @@
 package com.jihye.parking.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,9 +25,13 @@ public class Inquire extends HttpServlet {
 		boolean update = Ldao.update(carNum);
 		System.out.println("update----->" + update);
 
-		res.setContentType("text/html; charset = utf-8");
-		PrintWriter out = res.getWriter();
-		res.addHeader("Refresh", "5; url = inquirelog");
+		RequestDispatcher rd = req.getRequestDispatcher("/inquirelog");
+		rd.forward(req, res);
+
+//		res.setContentType("text/html; charset = utf-8");
+//		PrintWriter out = res.getWriter();
+//		res.addHeader("Refresh", "5; url = inquirelog");
+//		res.sendRedirect("/inquirelog");
 
 		/*
 		 * boolean timeoutUpdate = Ldao.update(carNum);
