@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 //insert, update, delete, select 작업 수행할 메소드로 구성
@@ -52,7 +54,7 @@ public class Mdao {
 
 	}
 
-	public static boolean insert(String name, String carNum, int type) {
+	public static boolean insert(String name, String carNum, String type) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -62,13 +64,22 @@ public class Mdao {
 		try {
 			// 1. DB 연결
 			con = new DBConnect().getCon();
-			String sql = "INSERT INTO MEMBER (name, carNum, type) " + "VALUES (?, ?, ?)";
+			String sql = "INSERT INTO MEMBER (name, carNum, type, expDate) " + "VALUES (?, ?, ?, ?)";
 			// 2.SQL문 준비
 			pstmt = con.prepareStatement(sql);
 			// 3. 준비된 SQL문의 물음표마다 값 바인딩하기
 			pstmt.setString(1, name);
 			pstmt.setString(2, carNum);
-			pstmt.setInt(3, type);
+			pstmt.setString(3, type);
+
+			Date today = new Date();
+			System.out.println(today); // Sat Jul 14 22:25:03 IST 2018
+
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, 4);
+			java.util.Date now = cal.getTime();
+
+			pstmt.setTimestamp(4, new java.sql.Timestamp(now.getTime()));
 			// 4. DB에 DATA를 업데이트 한다.
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -123,8 +134,6 @@ public class Mdao {
 			 */
 
 			switch (type) {
-			case "0":
-				return "0";
 			case "1":
 				return "1";
 			case "2":
@@ -132,7 +141,7 @@ public class Mdao {
 			}
 
 		}
-		return "4";
+		return "0";
 
 	}
 

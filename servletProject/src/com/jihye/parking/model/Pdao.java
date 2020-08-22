@@ -22,7 +22,7 @@ public class Pdao {
 		try {
 			// 1. DB 연결
 			con = new DBConnect().getCon();
-			String sql = "INSERT INTO payment (amount, type, carNum) " + "VALUES (?, ?, ?)";
+			String sql = "INSERT INTO payment (amount, method, carNum) " + "VALUES (?, ?, ?)";
 			// 2.SQL문 준비
 			pstmt = con.prepareStatement(sql);
 			// 3. 준비된 SQL문의 물음표마다 값 바인딩하기

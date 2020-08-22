@@ -31,6 +31,9 @@ public class Check extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+		res.setCharacterEncoding("utf-8");
+		res.setContentType("text/html; charset=UTF-8");
+
 		String carNum = req.getParameter("carNum");
 		System.out.println("check controller");
 
@@ -156,8 +159,24 @@ public class Check extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher dp = req.getRequestDispatcher("/payment.jsp");
-		dp.forward(req, res);
+		if (mType.equals("1")) {
+
+			System.out.println("회원 출차한다.");
+			boolean pinsert = Pdao.insert(0, "0", carNum);
+			System.out.println("pinsert::::" + pinsert);
+			Ldao.delete(carNum);
+
+			res.setContentType("text/html;charset=utf-8");
+			PrintWriter out = res.getWriter();
+			out.print("<script type='text/javascript'>");
+			out.print("alert('출차 완료 ');");
+			out.print("location.href='/';");
+			out.print("</script>");
+		} else {
+
+			RequestDispatcher dp = req.getRequestDispatcher("/payment.jsp");
+			dp.forward(req, res);
+		}
 
 	}
 

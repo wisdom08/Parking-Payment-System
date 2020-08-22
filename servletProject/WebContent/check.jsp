@@ -20,18 +20,23 @@
 		}
 	%>
  --%>
-	<%= request.getAttribute("carNum") %> 님
-	
-	가격은
+	<%=request.getAttribute("carNum")%>
+	님 가격은
 	<%=request.getAttribute("price")%>
 	원 입니다.
 
 
-	<form method="post" action="checkPrice">
+	<form method="post" action="checkprice">
 		<label>계산 금액을 정확하게 입력해주세요. </label> <input type="text" name="uprice"
-			id="uprice"> <br> <label>결제방법을 적어주세요.1은 카드 2는 현금</label> <input
-			type="text" name="method"> <br> <input type="submit" value="결제"
-			>
+			id="uprice"> <br> <label>결제방법을 선택해주세요.</label>
+		<input type="text" name="method"> <br> 
+<!-- 		<input type="radio" name="method" value="카드">
+		<input type="radio" name="method" value="현금"> -->
+		
+		영수증 발급 여부
+		<input type="radio" name="receipt" value="YES">
+		<input type="radio" name="receipt" value="NO">
+		<input type="submit" value="결제">
 
 
 		<%
@@ -39,23 +44,6 @@
 		%>
 
 	</form>
-
-	<script>
-		let uprice = document.getElementById("uprice");
-	<%=price%>
-
-	
-		
-		/* function btn() {
-
-			var condition = true;
-			if (condition) {
-		/* 	alert("price::::" + price);
-			alert("uprice::::" + uprice); */
-				alert("결제 완료");
-			}
-		} */
-	</script>
 
 
 </body>

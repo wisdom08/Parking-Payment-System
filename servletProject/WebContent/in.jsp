@@ -12,8 +12,8 @@
 	<!-- 입력정보: name, 차번호, type -->
 
 	<form method="post" action="park">
-	
-		<label>차번호: </label> 
+	 	
+		<label>차 번호: </label> 
 		<input type="text" name="carNum"> <br> 
 	
 		<input type="submit" value="입차" onclick="btn()">
