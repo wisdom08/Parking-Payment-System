@@ -123,15 +123,19 @@ public class Check extends HttpServlet {
 			switch (mType) {
 			case "0":
 				req.setAttribute("mType", "0");
+				System.out.println("멤버타입:::::" + mType);
 				break;
 			case "1":
 				req.setAttribute("mType", "1");
+				System.out.println("멤버타입:::::" + mType);
 				break;
 			case "2":
 				req.setAttribute("mType", "2");
+				System.out.println("멤버타입:::::" + mType);
 				break;
 			case "4":
 				req.setAttribute("mType", "4");
+				System.out.println("멤버타입:::::" + mType);
 				break;
 			}
 

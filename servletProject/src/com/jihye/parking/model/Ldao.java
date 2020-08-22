@@ -60,7 +60,7 @@ public class Ldao {
 
 	}
 
-	public static boolean update(String ucarNum) throws SQLException {
+	public static boolean update(String carNum) throws SQLException {
 
 		System.out.println("ldao timeout update 진입");
 
@@ -92,7 +92,7 @@ public class Ldao {
 			java.util.Date now = calendar.getTime();
 
 			pstmt.setTimestamp(1, new java.sql.Timestamp(now.getTime()));
-			pstmt.setString(2, ucarNum);
+			pstmt.setString(2, carNum);
 			System.out.println("slq문 바인딩");
 			// 4. DB에 DATA를 업데이트 한다.
 			flag = pstmt.executeUpdate();

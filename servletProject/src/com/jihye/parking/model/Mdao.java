@@ -95,7 +95,7 @@ public class Mdao {
 
 	}
 
-	public static String select(String ucarNum) throws SQLException {
+	public static String select(String carNum) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -107,7 +107,7 @@ public class Mdao {
 		// 2.SQL문 준비
 		pstmt = con.prepareStatement(sql);
 		// 3. 준비된 SQL문의 물음표마다 값 바인딩하기
-		pstmt.setString(1, ucarNum);
+		pstmt.setString(1, carNum);
 		// 4. DB에 DATA를 업데이트 한다.
 		rs = pstmt.executeQuery();
 

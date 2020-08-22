@@ -1,6 +1,6 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,36 +10,36 @@
 <body>
 
 
-<h1> log 조회</h1>
+	<h1>log 조회</h1>
 
-<table border="1" >
-	<tr>
-		<th>timeIn</th>
-		<th>timeOut</th>
-		<th>carNum</th>
-	</tr>
-	<c:forEach var="temp" items="${logs}">
-	<tr>
-		<td>	${temp.timeIn } </td>
- 		<td>	${temp.timeOut }  </td>
-		<td>	${temp.carNum } </td>
-	</tr>
-	</c:forEach>
+	<table border="1">
+		<tr>
+			<th>timeIn</th>
+			<th>timeOut</th>
+			<th>carNum</th>
+		</tr>
+		<c:forEach var="temp" items="${logs}">
+			<tr>
+				<td>${temp.timeIn }</td>
+				<td>${temp.timeOut }</td>
+				<td>${temp.carNum }</td>
+			</tr>
+		</c:forEach>
 	</table>
 
-<table border="1" >
-	<tr>
-		<th>amount</th>
-		<th>type(0은 게스트, 1은 장기회원, 2는 쿠폰이용자)</th>
-	</tr>
-	<c:forEach var="temp" items="${plist}">
-	<tr>
-		<td>	${temp.amount } </td>
-		<td>	${temp.type } </td>
-	</tr>
-	</c:forEach>
-	</table>
+ 	
+		가격:
+		<%= request.getAttribute("price") %>
 
+
+
+	멤버타입:
+	<%=request.getAttribute("mType")%>
+	//////////////
+(0 게스트
+1 장기회원
+2 쿠폰이용자
+4 입차하지 않은 차량)
 
 </body>
 </html>

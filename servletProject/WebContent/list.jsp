@@ -10,7 +10,7 @@
 
 <h1>개인 별 조회</h1>
 	
-	<form method="get" action="inquire">
+	<form method="post" action="inquire">
 	
 		<label>차번호: </label> 
 		<input type="text" name="carNum"> <br> 
