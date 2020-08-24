@@ -18,6 +18,27 @@
 	
 		<input type="submit" value="입차" onclick="btn()">
 	</form>
+	
+<table border="1">
+			<tr>
+				<td>시간</td>
+				<td>이용 요금</td>
+			</tr>
+
+			<tr>
+				<td>1시간</td>
+				<td>1000원</td>
+			</tr>
+
+			<tr>
+				<td>1일(24시간)</td>
+				<td>12000원</td>
+			</tr>
+
+
+		</table>
+
+
 
 	<script>
 		function btn() {
@@ -26,7 +47,7 @@
 			
 			var condition = true;
 			if (condition) {
-				alert("입차 완료");
+				//alert("입차 완료");
 			//	location.href = "index.jsp";
 			}
 		}

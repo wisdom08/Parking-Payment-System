@@ -140,6 +140,10 @@ public class Inquire extends HttpServlet {
 			boolean pdaoresult = Pdao.insert(price, carNum);
 			System.out.println("pdaoinserturesutl:::" + pdaoresult);
 
+			if (price == 0) {
+				Pdao.delete(carNum);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

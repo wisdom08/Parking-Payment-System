@@ -313,4 +313,8 @@ public class Ldao {
 		}
 	}
 
+	public static void select() {
+
+	}
+
 }

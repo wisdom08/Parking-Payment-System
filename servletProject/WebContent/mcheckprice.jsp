@@ -7,14 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>출차</h1>
-	
-	<form method="post" action="check">
-		<label>차번호: </label> 
-		<input type="text" name="carNum"> <br> 
-		<input type="submit" value="계산">
-	</form>
-	
-	
+	<h1>price chk chk </h1>
 </body>
 </html>

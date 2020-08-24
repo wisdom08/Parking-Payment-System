@@ -15,5 +15,7 @@
 	
 	<a href="./join"><label>회원 등록(쿠폰이용자/장기 회원)</label></a>
 	
+	<a href="./admin"><label>관리자</label></a>
+	
 </body>
 </html>

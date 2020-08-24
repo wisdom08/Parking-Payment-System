@@ -26,6 +26,8 @@ import com.jihye.parking.model.Time;
 @WebServlet("/check")
 public class Check extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long price;
+	private static Date expDate;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -152,8 +154,10 @@ public class Check extends HttpServlet {
 			req.setAttribute("times", times);
 			req.setAttribute("price", price);
 
-			boolean pdaoresult = Pdao.insert(price, carNum);
-			System.out.println("pdaoinserturesutl:::" + pdaoresult);
+			/*
+			 * boolean pdaoresult = Pdao.insert(price, carNum);
+			 * System.out.println("pdaoinserturesutl:::" + pdaoresult);
+			 */
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,18 +166,42 @@ public class Check extends HttpServlet {
 		if (mType.equals("1")) {
 
 			System.out.println("회원 출차한다.");
-			boolean pinsert = Pdao.insert(0, "0", carNum);
-			System.out.println("pinsert::::" + pinsert);
+			// boolean pinsert = Pdao.insert(0, "0", carNum);
+			// System.out.println("pinsert::::" + pinsert);
 			Ldao.delete(carNum);
 
+			try {
+				expDate = Mdao.getExpdate(carNum);
+				System.out.println("서블릿으로 넘어온 expDate:::::::" + expDate);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("서블릿으로 넘어온 expDate22:::::::" + expDate);
 			res.setContentType("text/html;charset=utf-8");
 			PrintWriter out = res.getWriter();
 			out.print("<script type='text/javascript'>");
-			out.print("alert('출차 완료 ');");
+			out.print("alert(\"출차 완료 (남은 기간 안내: ");
+			out.print(expDate);
+			out.println(")\");");
 			out.print("location.href='/';");
 			out.print("</script>");
 		} else {
 
+			boolean pdaoresult = false;
+			try {
+				pdaoresult = Pdao.insert(price, carNum);
+
+				if (price == 0) {
+					Pdao.delete(carNum);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("pdaoinserturesutl:::" + pdaoresult);
 			RequestDispatcher dp = req.getRequestDispatcher("/payment.jsp");
 			dp.forward(req, res);
 		}

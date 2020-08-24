@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jihye.parking.model.Ldao;
+import com.jihye.parking.model.Mdao;
 import com.jihye.parking.model.Pdao;
 
 /**
  * Servlet implementation class CheckPrice
  */
-@WebServlet("/checkprice")
-public class CheckPrice extends HttpServlet {
+@WebServlet("/mcheckprice")
+public class Mcheckprice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -26,15 +26,19 @@ public class CheckPrice extends HttpServlet {
 		res.setContentType("text/html; charset=UTF-8");
 
 		String uprice = req.getParameter("uprice");
+		String type = req.getParameter("type");
+		System.out.println("입력한 type:::::" + type);
 		System.out.println("입력한 uprice:::::" + uprice);
 		String method = req.getParameter("method");
 		System.out.println("method:!!!!!!!!!!!!!!:::" + method);
 		String receipt = req.getParameter("receipt");
 		System.out.println("receipt:!!!!!!!!!!!!!!:::" + receipt);
+		String name = req.getParameter("name");
+		System.out.println("name:!!!!!!!!!!!!!!:::" + name);
 
 		String carNum = req.getParameter("carNum");
 		String price = req.getParameter("price");
-		int num = Integer.parseInt(price);
+		/* int num = Integer.parseInt(price); */
 
 		System.out.println("payment에서 넘어온 실제 가격:::::::" + price);
 		System.out.println("pyament에서 넘어온 차 번호::::" + carNum);
@@ -66,17 +70,20 @@ public class CheckPrice extends HttpServlet {
 				out.print("</script>");
 
 			} else {
-				System.out.println("결제완료");
-				boolean pinsert = Pdao.insert(num, method, carNum);
-				System.out.println("pinsert::::" + pinsert);
-				Ldao.delete(carNum);
+				System.out.println("결제완료 및 회원 등록 완료");
+				boolean MdaoResult = Mdao.insert(name, carNum, type);
+				System.out.println("name:::::" + name);
+				System.out.println("carNum:::::" + carNum);
+				System.out.println("type:::::" + type);
+				System.out.println("MdaoResult:::::" + MdaoResult);
 
-				// Pdao.delete(carNum);
+				boolean pinsert = Pdao.insertp(price, method, carNum);
+				System.out.println("pinsert::::" + pinsert);
 
 				res.setContentType("text/html;charset=utf-8");
 				PrintWriter out = res.getWriter();
 				out.print("<script type='text/javascript'>");
-				out.print("alert('결제 완료');");
+				out.print("alert('결제완료 및 회원 등록 완료');");
 				out.print("location.href = '/';");
 				out.print("</script>");
 			}

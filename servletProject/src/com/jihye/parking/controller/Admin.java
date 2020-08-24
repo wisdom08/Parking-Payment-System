@@ -9,16 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/in")
-public class In extends HttpServlet {
+/**
+ * Servlet implementation class Admin
+ */
+@WebServlet("/admin")
+public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		// redirect to a different page(view)
-
-		RequestDispatcher dp = req.getRequestDispatcher("in.jsp");
+		RequestDispatcher dp = req.getRequestDispatcher("admin.jsp");
 		dp.forward(req, res);
-
 	}
+
 }

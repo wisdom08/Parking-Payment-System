@@ -20,8 +20,8 @@
 		}
 	%>
  --%>
-
-	<%=request.getAttribute("carNum")%>
+	<%=request.getAttribute("carNum")%> 차주
+	<%=request.getAttribute("name")%>
 	님
 
 	<!--  시간 추가 해야한다.  -->
@@ -34,14 +34,26 @@
 	
  <%} else if(mType.equals("2")){%>
  	가격은  price/2 입니다. 
- 	
  <%} %> --%>
 
+<% String position = (String)request.getAttribute("position"); 
+	String name = (String)request.getAttribute("name");
+	String carNum = (String)request.getAttribute("carNum");
+	
+	long price = 0; 
+	if(position.equals("1")){  price = 10000; %>
+	이용요금은 10,000 원입니다. 
+	<%} else if(position.equals("2")){ price = 40000; %>
+	이용요금은 40,000 원입니다. 
+		<%} else if(position.equals("3")){ price = 80000; %>
+	이용요금은 80,000 원입니다. 
+		<%} else if(position.equals("4")){ price = 120000; %>
+	이용요금은 120,000 원입니다. 
+		<%} else {  price = 10000; %>
+	이용요금은 10,000 원입니다. 
+	<%} %>
 
-	가격은
-	<%=request.getAttribute("price")%>
-	원 입니다.
-	<form method="post" action="checkprice">
+	<form method="post" action="mcheckprice">
 		<label>계산 금액을 정확하게 입력해주세요. </label> 
 		<input type="text" name="uprice" id="uprice"> <br> 
 		<label>결제방법을 적어주세요.</label> 
@@ -54,8 +66,10 @@
 		<input type="radio" name="receipt"> YES
 		<input type="radio" name="receipt"> NO
 		<br>
-		<input type="hidden" name="carNum" value="<%=request.getAttribute("carNum")%>"> 
-		<input type="hidden" name="price" id="price" value="<%=request.getAttribute("price")%>"> 
+		<input type="hidden" name="carNum" value=<%=request.getAttribute("carNum")%>> 
+		<input type="hidden" name="name" value= <%=request.getAttribute("name")%>> 
+		<input type="hidden" name="type" value=<%=request.getAttribute("type")%>> 
+		<input type="hidden" name="price" id="price" value= <%=request.getAttribute("price")%>> 
 		<input type="submit" value="결제" onclick="btn()">
 
 	</form>
