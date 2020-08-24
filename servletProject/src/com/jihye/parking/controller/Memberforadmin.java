@@ -24,12 +24,10 @@ public class Memberforadmin extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		try {
-
 			List<Mdto> mlist = Mdao.selectMember();
-
 			req.setAttribute("mlist", mlist);
-
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -4,11 +4,50 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 //insert, update, delete, select 작업 수행할 메소드로 구성
 public class Ldao {
+
+	static ArrayList<Ldto> list;
+
+	public static ArrayList<Ldto> selectforadmin() throws SQLException {
+
+		list = new ArrayList<>();
+		Connection con = null;
+		con = new DBConnect().getCon();
+		Statement stmt = con.createStatement();
+		System.out.println("selectforadmin 진입 ");
+
+		String sql = "SELECT * FROM logs";
+
+		ResultSet rs = stmt.executeQuery(sql);
+
+		while (rs.next()) {
+
+			int lid = rs.getInt(1);
+			String timeIn = rs.getString(2);
+			String timeOut = rs.getString(3);
+			String carNum = rs.getString(4);
+
+			Ldto l = new Ldto(lid, timeIn, timeOut, carNum);
+			list.add(l);
+
+			for (Ldto temp : list) {
+				System.out.println("어드민lid:::" + temp.getLid());
+				System.out.println("어드민timeIn:::" + temp.getTimeIn());
+				System.out.println("어드민timeOut:::" + temp.getTimeOut());
+				System.out.println("어드민carNum:::" + temp.getCarNum());
+			}
+			System.out.println("selectforadmin 보관 완료");
+
+		}
+
+		return list;
+
+	}
 
 	public static boolean insert(String carNum) {
 

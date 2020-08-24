@@ -13,7 +13,7 @@ import java.util.List;
 //insert, update, delete, select 작업 수행할 메소드로 구성
 public class Mdao {
 
-	static ArrayList<Mdto> member;
+	static ArrayList<Mdto> list;
 
 	public static boolean insertGuest(String carNum) {
 
@@ -297,28 +297,47 @@ public class Mdao {
 
 	public static List<Mdto> selectMember() throws SQLException {
 
-		member = new ArrayList<>();
-
+		list = new ArrayList<>();
 		Connection con = null;
-		// PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
 		con = new DBConnect().getCon();
 		Statement stmt = con.createStatement();
-		String sql = "SELECT * FROM MEMBER WHERE expDate not in(null)";
-		rs = stmt.executeQuery(sql);
+		System.out.println("selectMember 진입 ");
 
-		System.out.println("MDAO select 성공");
+		String sql = "SELECT * FROM MEMBER WHERE expDate is not null";
+
+		ResultSet rs = stmt.executeQuery(sql);
 
 		while (rs.next()) {
+
 			int id = rs.getInt(1);
 			String name = rs.getString(2);
 			String carNum = rs.getString(3);
-			int type = rs.getInt(4);
-			Date regDate = rs.getDate(5);
-			Date expDate = rs.getDate(6);
+			String type = rs.getString(3);
+			String regDate = rs.getString(4);
+			String expDate = rs.getString(4);
+
+			System.out.println(carNum);
+			System.out.println(type);
+			System.out.println("왜 안나와 날짜 나와라 날짜:" + regDate);
+			System.out.println("왜 안나와 날짜 나와라 날짜:" + expDate);
+
+			Mdto m = new Mdto(id, name, carNum, type, regDate, expDate);
+			list.add(m);
+
+			/*
+			 * for (Mdto temp : list) { System.out.println("어드민id:::" + temp.getId());
+			 * System.out.println("어드민name:::" + temp.getName());
+			 * System.out.println("어드민carNum:::" + temp.getCarNum());
+			 * System.out.println("어드민type:::" + temp.getType());
+			 * System.out.println("어드민regDate:::" + temp.getRegDate());
+			 * System.out.println("어드민expDate:::" + temp.getExpDate()); }
+			 */
+			System.out.println("selectforadmin 보관 완료");
+
 		}
-		return member;
+
+		return list;
+
 	}
 
 }

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jihye.parking.model.Mdao;
-import com.jihye.parking.model.Mdto;
+import com.jihye.parking.model.Ldao;
+import com.jihye.parking.model.Ldto;
 
 /**
  * Servlet implementation class Welcomeadmin
@@ -24,12 +24,10 @@ public class Logforadmin extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		try {
-
-			List<Mdto> mlist = Mdao.selectMember();
-
-			req.setAttribute("mlist", mlist);
-
+			List<Ldto> llist = Ldao.selectforadmin();
+			req.setAttribute("llist", llist);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

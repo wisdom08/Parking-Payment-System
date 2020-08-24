@@ -17,6 +17,14 @@ public class Pdto {
 		this.method = method;
 	}
 
+	public Pdto(int pid, int amount, String method, String date, String carNum) {
+		this.pid = pid;
+		this.amount = amount;
+		this.method = method;
+		this.date = date;
+		this.carNum = carNum;
+	}
+
 	public int getPid() {
 		return pid;
 	}

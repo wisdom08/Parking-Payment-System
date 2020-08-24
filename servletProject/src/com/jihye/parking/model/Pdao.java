@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Pdao {
+
+	static ArrayList<Pdto> list;
 
 	public static boolean insert(int amount, String method, String carNum) {
 
@@ -326,48 +329,38 @@ public class Pdao {
 
 	}
 
-	public static ArrayList<Pdto> selectforadmin() {
+	public static ArrayList<Pdto> selectforadmin() throws SQLException {
 
-		ArrayList<Pdto> list = new ArrayList<Pdto>();
+		list = new ArrayList<>();
 		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
+		con = new DBConnect().getCon();
+		Statement stmt = con.createStatement();
 		System.out.println("selectforadmin 진입 ");
 
-		try {
-			// 1. DB 연결
-			con = new DBConnect().getCon();
-			String sql = "SELECT * FROM payment";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+		String sql = "SELECT * FROM payment";
 
-			while (rs.next()) {
+		ResultSet rs = stmt.executeQuery(sql);
 
-				int amount = rs.getInt("amount");
-				String method = rs.getString("method");
+		while (rs.next()) {
 
-				System.out.println(amount);
-				System.out.println(method);
+			int pid = rs.getInt(1);
+			int amount = rs.getInt(2);
+			String method = rs.getString(3);
+			String date = rs.getString(4);
+			String carNum = rs.getString(5);
 
-				Pdto p = new Pdto();
-				list.add(p);
+			Pdto p = new Pdto(pid, amount, method, date, carNum);
+			list.add(p);
 
-				System.out.println("selectforadmin 보관 완료");
+			for (Pdto temp : list) {
+				System.out.println("어드민amount:::" + temp.getAmount());
+				System.out.println("어드민pid:::" + temp.getPid());
+				System.out.println("어드민carNum:::" + temp.getCarNum());
+				System.out.println("어드민method:::" + temp.getMethod());
+				System.out.println("어드민date:::" + temp.getDate());
 			}
+			System.out.println("selectforadmin 보관 완료");
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				// 5. 사용한 객체를 닫아준다.
-				if (con != null)
-					con.close();
-				// if (stmt != null)
-				// stmt.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
 		}
 
 		return list;

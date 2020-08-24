@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member</title>
+<title>payment</title>
 </head>
 <body>
 
@@ -13,10 +13,10 @@
 	<table border="1" >
 	<tr>
 		<th>id</th>
-		<th>amount</th>
-		<th>method</th>
-		<th>date</th>
-		<th>carNum</th>
+		<th>이용요금</th>
+		<th>결제 방법(1은 카드 / 2는 현금)</th>
+		<th>결제날짜</th>
+		<th>차번호</th>
 	</tr>
 	<c:forEach var="temp" items="${plist}">
 	<tr>

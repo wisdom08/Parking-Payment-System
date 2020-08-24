@@ -2,7 +2,7 @@ package com.jihye.parking.model;
 
 public class Mdto {
 
-	int mid;
+	int id;
 	String name;
 	String carNum;
 	String type;
@@ -12,9 +12,8 @@ public class Mdto {
 	public Mdto() {
 	}
 
-	public Mdto(int mid, String name, String carNum, String type, String regDate, String expDate) {
-		super();
-		this.mid = mid;
+	public Mdto(int id, String name, String carNum, String type, String regDate, String expDate) {
+		this.id = id;
 		this.name = name;
 		this.carNum = carNum;
 		this.type = type;
@@ -23,11 +22,11 @@ public class Mdto {
 	}
 
 	public int getId() {
-		return mid;
+		return id;
 	}
 
-	public void setId(int mid) {
-		this.mid = mid;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getRegDate() {
@@ -72,8 +71,8 @@ public class Mdto {
 
 	@Override
 	public String toString() {
-		return "Member [mid=" + mid + ", name=" + name + ", carNum=" + carNum + ", type=" + type + ", regDate="
-				+ regDate + ", expDate=" + expDate + "]";
+		return "Member [id=" + id + ", name=" + name + ", carNum=" + carNum + ", type=" + type + ", regDate=" + regDate
+				+ ", expDate=" + expDate + "]";
 	}
 
 }

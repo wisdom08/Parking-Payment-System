@@ -13,20 +13,20 @@
 	<table border="1" >
 	<tr>
 		<th>id</th>
-		<th>name</th>
-		<th>carNum</th>
-		<th>type(0.게스트 1.장기회원 2.쿠폰 이용자)</th>
-		<th>regDate</th>
-		<th>expDate</th>
+		<th>이름</th>
+		<th>차번호</th>
+		<th>회원타입(1은 장기회원 / 2는 쿠폰이용자)</th>
+		<th>등록일</th>
+		<th>만료일</th>
 	</tr>
-	<c:forEach var="member" items="${mlist}">
+	<c:forEach var="temp" items="${mlist}">
 	<tr>
-		<td>	${member.mid}  </td>
-		<td>	${member.name } </td>
- 		<td>	${member.carNum }  </td>
-		<td>	${member.type } </td>
-		<td>	${member.regDate } </td>
-		<td>	${member.expDate } </td>
+		<td>	${temp.id}  </td>
+		<td>	${temp.name } </td>
+		<td>	${temp.carNum } </td>
+ 		<td>	${temp.type }  </td>
+		<td>	${temp.regDate } </td>
+		<td>	${temp.expDate } </td>
 	</tr>
 	</c:forEach>
 	</table>

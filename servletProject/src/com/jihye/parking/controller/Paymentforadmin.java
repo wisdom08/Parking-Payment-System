@@ -24,12 +24,10 @@ public class Paymentforadmin extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		try {
-
-			List<Pdto> Plist = Pdao.selectMember();
-
-			req.setAttribute("plist", Plist);
-
+			List<Pdto> plist = Pdao.selectforadmin();
+			req.setAttribute("plist", plist);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
