@@ -35,11 +35,14 @@
 
 	멤버타입:
 	<%=request.getAttribute("mType")%>
-	//////////////
+	
 (0 게스트
 1 장기회원
 2 쿠폰이용자
 )
+
+<br>
+<a href="./"><label>HOME</label></a>
 
 </body>
 </html>

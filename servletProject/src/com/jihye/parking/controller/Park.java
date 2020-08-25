@@ -36,27 +36,8 @@ public class Park extends HttpServlet {
 
 		// Ldao.delete(carNum);
 
-		try {
-			expDate = Mdao.getExpdate(carNum);
-			System.out.println("서블릿으로 넘어온 expDate:::::::" + expDate);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("서블릿으로 넘어온 expDate22:::::::" + expDate);
-
-		SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-		Date currentTime = new Date();
-		String mTime = mSimpleDateFormat.format(currentTime);
-		System.out.println(mTime);
-
-		System.out.println("날짜 출력::::::::::" + mTime);
-
 		boolean parkCheck = Ldao.selectLogCheck(carNum);
 		System.out.println("입차여부 체크!!! " + parkCheck);
-
-		System.out.println(mTime + expDate);
 
 		// exPdate는 date
 		// mTime 은 string
@@ -73,48 +54,70 @@ public class Park extends HttpServlet {
 			// 입차 x
 
 			try {
-				java.util.Date d = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(mTime);
-
-				int compare = d.compareTo(expDate);
-
-				if (compare > 0) {
-					System.out.println("d>expdate");
-
-					Mdao.delete(carNum);
-					System.out.println("기간만료 회원 삭제");
-
-					res.setContentType("text/html;charset=utf-8");
-					PrintWriter out = res.getWriter();
-					out.print("<script type='text/javascript'>");
-					out.print("alert('회원 기간 만료되었서 일반요금으로 부가됩니다.(입차 중에도 회원 등록 가능합니다.)');");
-					out.print("</script>");
-
-				} else if (compare < 0) {
-					System.out.println("d<expdate");
-
-				} else {
-					System.out.println("d == expdate");
-
-					res.setContentType("text/html;charset=utf-8");
-					PrintWriter out = res.getWriter();
-					out.print("<script type='text/javascript'>");
-					out.print("alert('오늘은 회원 기간 만료일입니다.');");
-					out.print("</script>");
-
-				}
-
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			try {
 				if (Mdao.isGuest(carNum)) {
 					// 게스트다
 					boolean guestresult = Mdao.insertGuest(carNum);
 					System.out.println("guestresult::::::" + guestresult);
+
+				} else {
+
+					// 멤버다
+
+					try {
+						expDate = Mdao.getExpdate(carNum);
+						System.out.println("서블릿으로 넘어온 expDate:::::::" + expDate);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					System.out.println("서블릿으로 넘어온 expDate22:::::::" + expDate);
+
+					SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+					Date currentTime = new Date();
+					String mTime = mSimpleDateFormat.format(currentTime);
+					System.out.println(mTime);
+
+					System.out.println("날짜 출력::::::::::" + mTime);
+					System.out.println(mTime + expDate);
+
+					java.util.Date d = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(mTime);
+
+					int compare = d.compareTo(expDate);
+
+					if (compare > 0) {
+						System.out.println("d>expdate");
+
+						Mdao.delete(carNum);
+						System.out.println("기간만료 회원 삭제");
+
+						boolean guestresult = Mdao.insertGuest(carNum);
+						System.out.println("guestresult::::::" + guestresult);
+
+						res.setContentType("text/html;charset=utf-8");
+						PrintWriter out = res.getWriter();
+						out.print("<script type='text/javascript'>");
+						out.print("alert('회원 기간 만료되었서 일반요금으로 부가됩니다.(입차 중에도 회원 등록 가능합니다.)');");
+						out.print("</script>");
+
+					} else if (compare < 0) {
+						System.out.println("d<expdate");
+
+					} else {
+						System.out.println("d == expdate");
+
+						res.setContentType("text/html;charset=utf-8");
+						PrintWriter out = res.getWriter();
+						out.print("<script type='text/javascript'>");
+						out.print("alert('오늘은 회원 기간 만료일입니다.');");
+						out.print("</script>");
+
+					}
+
 				}
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

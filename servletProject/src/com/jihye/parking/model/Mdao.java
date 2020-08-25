@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -187,13 +186,13 @@ public class Mdao {
 		ArrayList<Mdto> member = new ArrayList<>();
 
 		Connection con = null;
-		// PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		con = new DBConnect().getCon();
-		Statement stmt = con.createStatement();
 		String sql = "SELECT * FROM MEMBER";
-		rs = stmt.executeQuery(sql);
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
 
 		System.out.println("MDAO select 성공");
 
@@ -295,26 +294,28 @@ public class Mdao {
 		return expDate;
 	}
 
-	public static List<Mdto> selectMember() throws SQLException {
+	public static ArrayList<Mdto> selectMember() throws SQLException {
 
-		list = new ArrayList<>();
+		ArrayList<Mdto> list = new ArrayList<Mdto>();
 		Connection con = null;
-		con = new DBConnect().getCon();
-		Statement stmt = con.createStatement();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		System.out.println("selectMember 진입 ");
 
+		con = new DBConnect().getCon();
 		String sql = "SELECT * FROM MEMBER WHERE expDate is not null";
-
-		ResultSet rs = stmt.executeQuery(sql);
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
 
 		while (rs.next()) {
 
 			int id = rs.getInt(1);
 			String name = rs.getString(2);
 			String carNum = rs.getString(3);
-			String type = rs.getString(3);
-			String regDate = rs.getString(4);
-			String expDate = rs.getString(4);
+			String type = rs.getString(4);
+			String regDate = rs.getString(5);
+			String expDate = rs.getString(6);
 
 			System.out.println(carNum);
 			System.out.println(type);

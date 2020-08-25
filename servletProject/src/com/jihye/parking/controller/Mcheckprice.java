@@ -2,6 +2,7 @@ package com.jihye.parking.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,6 +72,20 @@ public class Mcheckprice extends HttpServlet {
 
 			} else {
 				System.out.println("결제완료 및 회원 등록 완료");
+
+				try {
+					String incar = Mdao.select(carNum);
+
+					if (incar.equals("0")) {
+
+						Mdao.delete(carNum);
+
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
 				boolean MdaoResult = Mdao.insert(name, carNum, type);
 				System.out.println("name:::::" + name);
 				System.out.println("carNum:::::" + carNum);
