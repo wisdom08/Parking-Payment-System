@@ -74,9 +74,9 @@ public class Mcheckprice extends HttpServlet {
 				System.out.println("결제완료 및 회원 등록 완료");
 
 				try {
-					String incar = Mdao.select(carNum);
+					String incarCheck = Mdao.select(carNum);
 
-					if (incar.equals("0")) {
+					if (incarCheck.equals("0")) {
 
 						Mdao.delete(carNum);
 
