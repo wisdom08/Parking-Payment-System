@@ -69,9 +69,8 @@ public class CheckPrice extends HttpServlet {
 				System.out.println("결제완료");
 				boolean pinsert = Pdao.insert(num, method, carNum);
 				System.out.println("pinsert::::" + pinsert);
-				Ldao.delete(carNum);
 
-				// Pdao.delete(carNum);
+				Ldao.delete(carNum);
 
 				res.setContentType("text/html;charset=utf-8");
 				PrintWriter out = res.getWriter();

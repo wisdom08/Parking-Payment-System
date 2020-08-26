@@ -58,6 +58,7 @@ public class Check extends HttpServlet {
 		}
 
 		String mType = "0";
+
 		try {
 			mType = Mdao.select(carNum);
 		} catch (SQLException e) {
@@ -188,6 +189,10 @@ public class Check extends HttpServlet {
 			out.print("location.href='/';");
 			out.print("</script>");
 		} else {
+
+			if (mType.equals("0")) {
+				Mdao.delete(carNum);
+			}
 
 			boolean pdaoresult = false;
 			try {

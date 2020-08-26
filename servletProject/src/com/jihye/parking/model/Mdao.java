@@ -238,7 +238,7 @@ public class Mdao {
 			// 4. DB에 DATA를 업데이트 한다.
 			flag = pstmt.executeUpdate();
 			System.out.println("db에 데이터 업데이트");
-			System.out.println("Ldao 딜리트 진입");
+			System.out.println("mdao 딜리트 진입");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
