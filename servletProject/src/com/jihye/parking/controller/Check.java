@@ -192,6 +192,7 @@ public class Check extends HttpServlet {
 
 			if (mType.equals("0")) {
 				Mdao.delete(carNum);
+				System.out.println("m");
 			}
 
 			boolean pdaoresult = false;

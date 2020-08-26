@@ -15,8 +15,6 @@ public class In extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		// redirect to a different page(view)
-
 		RequestDispatcher dp = req.getRequestDispatcher("in.jsp");
 		dp.forward(req, res);
 
