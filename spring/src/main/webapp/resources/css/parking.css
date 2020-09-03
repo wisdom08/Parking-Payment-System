@@ -1,0 +1,26 @@
+/*  전체 영역 */
+
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+*{
+	font-family: 'Do Hyeon', sans-serif;
+	text-decoration: none; 
+}
+
+*:hover {
+	color: #bbbbbb;	
+	text-decoration: none; 
+	cursor: pointer; 
+	
+}
+
+
+/* 네비 영역 */
+
+.navbar-default {
+	background-color: #000000;
+	border-color: #000000;
+	text-align: center; 
+}
+
